@@ -1,0 +1,47 @@
+﻿@model AirBooker.Web.Models.Home.IndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <div class="typewriter-animation mt-5">
+                <h1 class="display-4">Airports we collaborate with:</h1>
+            </div>
+        </div>
+   </div>
+    <div class="input-group mt-3 mb-3 justify-content-center">
+        <form asp-action="Index" asp-controller="Home" method="post" class="w-50">
+            <select asp-for="@Model.SelectedAirportId" asp-items="@Model.DepartureAirports" class="form-select form-select-lg mb-3"></select>
+            <button class="btn btn-outline-secondary btn-lg mt-2" type="submit">Search <i class="bi bi-search"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        @if (Model.Flights.Count() > 0)
+        {
+            @foreach (var flight in Model.Flights)
+            {
+                <div class="col-md-4">
+                    @*<a asp-controller="Flight" asp-action="Index" asp-route-id="@flight.Id" style="text-decoration: none;">*@
+                        <partial name="_FlightCardPartial" model="flight" />
+                    @*</a>*@
+                </div>
+            }
+
+            <div class="row">
+                <partial name="_PaginationPartial" for="PaginationInfo" />
+            </div>
+        }
+        else
+        {
+            <div class="row justify-content-center">
+                <h3>Unfortunately, there are no available upcoming flights for today</h3>
+            </div>
+        }
+    </div>
+</div>

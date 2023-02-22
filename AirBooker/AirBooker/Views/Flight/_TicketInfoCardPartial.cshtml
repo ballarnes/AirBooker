@@ -1,0 +1,66 @@
+﻿@model FlightDto
+
+<div class="card">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Destination:</span>
+                <input type="text" class="form-control" value="@Model.ArrivalAirport.Place" disabled readonly>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Flight №:</span>
+                <input type="text" class="form-control" value="@Model.FlightNumber" disabled readonly>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Departure:</span>
+                <input type="text" class="form-control" value="@Model.DepartureAirport.Name" disabled readonly>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Arrival:</span>
+                <input type="text" class="form-control" value="@Model.ArrivalAirport.Name" disabled readonly>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Airline:</span>
+                <input type="text" class="form-control" value="@Model.Airline.Name" disabled readonly>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Departure date:</span>
+                <input type="text" class="form-control" value="@Model.DepartureDateTime.ToShortDateString()" disabled readonly />
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Departure time:</span>
+                <input type="text" class="form-control" value="@Model.DepartureDateTime.ToShortTimeString()" disabled readonly />
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Arrival date:</span>
+                <input type="text" class="form-control" value="@Model.ArrivalDateTime.ToShortDateString()" disabled readonly />
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Arrival time:</span>
+                <input type="text" class="form-control" value="@Model.ArrivalDateTime.ToShortTimeString()" disabled readonly />
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Travel time:</span>
+                <input type="text" class="form-control" value="@Model.TravelTime.ToString("hh':'mm")" disabled readonly />
+            </div>
+        </li>
+    </ul>
+</div>

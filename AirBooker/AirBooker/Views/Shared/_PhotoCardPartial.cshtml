@@ -1,0 +1,21 @@
+﻿@model PhotoCardViewModel
+
+@if (Model.IsLink)
+{
+    <a asp-controller="@Model.Controller" asp-action="@Model.Action" asp-route-id="@Model.Id">
+        <div class="card bg-dark text-white photo-card m-2">
+            <img src="@Model.PhotoUrl" class="card-img" alt="card photo">
+            <div class="card-img-overlay">
+                <h5 class="card-title">@Model.OverlayText</h5>
+            </div>
+        </div>
+    </a>
+}
+else {
+    <div class="card bg-dark text-white photo-card m-2">
+        <img src="@Model.PhotoUrl" class="card-img" alt="card photo">
+        <div class="card-img-overlay">
+            <h5 class="card-title">@Model.OverlayText</h5>
+        </div>
+    </div>
+}

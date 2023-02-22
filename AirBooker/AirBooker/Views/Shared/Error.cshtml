@@ -1,0 +1,21 @@
+﻿@model ErrorViewModel
+
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h4 class="text-danger">Error. An error occurred while processing your request.</h4>
+<h1 class="text-danger">@Model.ErrorMessage</h1>
+
+<div class="mt-3 d-flex justify-content-center">
+    <a href='javascript:history.go(-1)'>
+        <button type="button" class="btn btn-outline-secondary">Return back</button>
+    </a>
+</div>
+
+@if (Model.ShowRequestId && Model.RequiresAdditionalInfo)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}

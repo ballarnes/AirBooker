@@ -1,0 +1,24 @@
+﻿@model AirBooker.Web.Models.Payment.PaymentResultViewModel
+
+@{
+    ViewData["Title"] = "Result";
+}
+
+<div class="text-center justify-content-center">
+    <input type="hidden" name="flightBookingId" asp-for="@Model.FlightBookingId" />
+    <input type="hidden" name="returnFlightBookingId" asp-for="@Model.ReturnFlightBookingId" />
+    if (@Model.OperationSuccess) {
+        <i class="fa-regular fa-location-smile" style="font-size: 30px; color: green;"></i>
+        <h1 class="display-4 mt-5">Success!</h1>
+        <div class="row justify-content-md-center mt-3">
+            <div class="col col-lg-2"><p>123</p></div>
+            <div class="col col-lg-2">456</div>
+        </div>
+        <a asp-controller="Payment" asp-action="GetReceipt" target="_blank" asp-route-flightBookingId="@Model.FlightBookingId" asp-route-returnFlightBookingId="@Model.ReturnFlightBookingId">
+            <input type="button" class="btn btn-success" value="Download receipt"/>
+        </a>
+    }
+    else {
+        <p>error</p>
+    }
+</div>
