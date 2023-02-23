@@ -61,7 +61,7 @@ namespace AirBooker.Web.Controllers
             var flightBookingResponse = await _bookingService.GetBookingById(flightBookingId);
             var flightBooking = flightBookingResponse.Data.FirstOrDefault();
 
-            var pageHTML = string.Format(ReceiptMarkup,
+            var flightBookingHTML = string.Format(ReceiptMarkup,
                 flightBooking.User.UserName,
                 flightBookingId,
                 flightBooking.BookingDateTime,
@@ -73,11 +73,30 @@ namespace AirBooker.Web.Controllers
                 flightBooking.Flight.DepartureAirport.Name,
                 flightBooking.Flight.ArrivalAirport.Name);
 
-            using (MemoryStream stream = new MemoryStream())
+            if (returnFlightBookingId != null)
             {
-                var document = _documentService.CreatePDFDocument(pageHTML);
-                document.Save(stream, false);
-                return File(stream.ToArray(), "application/pdf");
+                var returnFlightBookingResponse = await _bookingService.GetBookingById(returnFlightBookingId.Value);
+                var returnFlightBooking = returnFlightBookingResponse.Data.FirstOrDefault();
+
+                var returnFlightBookingHTML = string.Format(ReceiptMarkup,
+                    returnFlightBooking.User.UserName,
+                    returnFlightBookingId,
+                    returnFlightBooking.BookingDateTime,
+                    returnFlightBooking.User.Email,
+                    returnFlightBooking.Flight.Airline.Name,
+                    returnFlightBooking.Flight.FlightNumber,
+                    returnFlightBooking.Flight.DepartureDateTime,
+                    returnFlightBooking.Flight.ArrivalDateTime,
+                    returnFlightBooking.Flight.DepartureAirport.Name,
+                    returnFlightBooking.Flight.ArrivalAirport.Name);
+
+                var document = _documentService.CreateCombinedPDFDocument(new[] { flightBookingHTML, returnFlightBookingHTML } , $"Booking - {flightBooking.BookingDateTime}");
+                return File(document, "application/pdf");
+            }
+            else
+            {
+                var document = _documentService.CreatePDFDocument(flightBookingHTML, $"Booking - {flightBooking.BookingDateTime}");
+                return File(document, "application/pdf");
             }
         }
     }

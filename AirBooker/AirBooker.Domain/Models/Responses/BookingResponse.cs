@@ -3,6 +3,6 @@
     public class BookingResponse
     {
         public Guid FlightBookingId { get; set; }
-        public Guid ReturnFlightBookindId { get; set; }
+        public Guid? ReturnFlightBookindId { get; set; }
     }
 }

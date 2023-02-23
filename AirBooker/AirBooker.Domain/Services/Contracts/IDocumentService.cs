@@ -4,6 +4,7 @@ namespace AirBooker.Domain.Services.Contracts
 {
     public interface IDocumentService
     {
-        PdfDocument CreatePDFDocument(string htmlData);
+        byte[] CreatePDFDocument(string htmlData, string fileName);
+        byte[] CreateCombinedPDFDocument(string[] htmlData, string fileName);
     }
 }
