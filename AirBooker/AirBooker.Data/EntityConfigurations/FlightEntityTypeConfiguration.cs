@@ -27,6 +27,10 @@ namespace AirBooker.Data.EntityConfigurations
             builder.Property(x => x.TravelTime)
                 .IsRequired();
 
+            builder.Property(x => x.TicketPrice)
+                .HasColumnType("smallmoney")
+                .IsRequired();
+
             builder.HasOne(x => x.Airline)
                 .WithMany(x => x.Flights)
                 .HasForeignKey(x => x.AirlineId);

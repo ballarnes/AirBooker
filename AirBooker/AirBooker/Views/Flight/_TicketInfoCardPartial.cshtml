@@ -1,4 +1,5 @@
-﻿@model FlightDto
+﻿@using System.Globalization;
+@model FlightDto
 
 <div class="card">
     <ul class="list-group list-group-flush">
@@ -60,6 +61,12 @@
             <div class="input-group">
                 <span class="input-group-text">Travel time:</span>
                 <input type="text" class="form-control" value="@Model.TravelTime.ToString("hh':'mm")" disabled readonly />
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="input-group">
+                <span class="input-group-text">Price:</span>
+                <input type="text" class="form-control" value="@Model.TicketPrice.ToString("C2", new CultureInfo("en-US"))" disabled readonly>
             </div>
         </li>
     </ul>

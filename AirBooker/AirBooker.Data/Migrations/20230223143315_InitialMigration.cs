@@ -119,7 +119,8 @@ namespace AirBooker.Data.Migrations
                     ArrivalDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TravelTime = table.Column<TimeSpan>(type: "time", nullable: false),
                     DepartureAirportId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ArrivalAirportId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ArrivalAirportId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TicketPrice = table.Column<decimal>(type: "smallmoney", nullable: false)
                 },
                 constraints: table =>
                 {

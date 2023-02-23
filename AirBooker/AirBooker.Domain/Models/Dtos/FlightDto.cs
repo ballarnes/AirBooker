@@ -16,6 +16,7 @@ namespace AirBooker.Domain.Models.Dtos
         public AirportDto DepartureAirport { get; set; } = null!;
         public Guid ArrivalAirportId { get; set; }
         public AirportDto ArrivalAirport { get; set; } = null!;
+        public decimal TicketPrice { get; set; }
         public List<BookingDto>? Bookings { get; set; }
     }
 }

@@ -161,6 +161,9 @@ namespace AirBooker.Data.Migrations
                     b.Property<int>("FreeSeatsCount")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("TicketPrice")
+                        .HasColumnType("smallmoney");
+
                     b.Property<TimeSpan>("TravelTime")
                         .HasColumnType("time");
 

@@ -14,6 +14,7 @@
         public Airport DepartureAirport { get; set; } = null!;
         public Guid ArrivalAirportId { get; set; }
         public Airport ArrivalAirport { get; set; } = null!;
+        public decimal TicketPrice { get; set; }
         public ICollection<Booking>? Bookings { get; set; } = new List<Booking>();
     }
 }

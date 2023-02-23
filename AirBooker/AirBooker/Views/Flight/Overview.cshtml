@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity;
+@using System.Globalization;
 @model AirBooker.Web.Models.Flight.OverviewViewModel
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -32,6 +33,36 @@
                                 <div class="input-group">
                                     <span class="input-group-text">Email:</span>
                                     <input type="text" class="form-control" value="@User.Identity!.Name" disabled readonly>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <h4 class="display-6">Total to pay:</h4>
+                    <div class="card">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="input-group">
+                                    <span class="input-group-text">Ticket (№ @Model.Flight.FlightNumber):</span>
+                                    <input type="text" class="form-control" value="@Model.Flight.TicketPrice.ToString("C2", new CultureInfo("en-US"))" disabled readonly>
+                                </div>
+                            </li>
+                            @if (Model.WithReturnFlight)
+                            {
+                                <li class="list-group-item">
+                                    <div class="input-group">
+                                        <span class="input-group-text">Return ticket (№ @Model.ReturnFlight.FlightNumber):</span>
+                                        <input type="text" class="form-control" value="@Model.ReturnFlight.TicketPrice.ToString("C2", new CultureInfo("en-US"))" disabled readonly>
+                                    </div>
+                                </li>
+                            }
+                            <li class="list-group-item">
+                                <div class="input-group">
+                                    <span class="input-group-text">Sum:</span>
+                                    <input type="text" class="form-control fw-bold" value="@((Model.Flight.TicketPrice + (Model.ReturnFlight != null ? Model.ReturnFlight.TicketPrice : 0)).ToString("C2", new CultureInfo("en-US")))" disabled readonly>
                                 </div>
                             </li>
                         </ul>

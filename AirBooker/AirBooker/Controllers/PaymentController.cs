@@ -6,6 +6,7 @@ namespace AirBooker.Web.Controllers
 {
     public class PaymentController : BaseController
     {
+        private readonly IFlightService _flightService;
         private readonly IBookingService _bookingService;
         private readonly IDocumentService _documentService;
 
@@ -13,23 +14,30 @@ namespace AirBooker.Web.Controllers
 
         public PaymentController(
             ILogger<PaymentController> logger,
+            IFlightService flightService,
             IBookingService bookingService,
             IDocumentService documentService)
             : base(logger)
         {
+            _flightService = flightService;
             _bookingService = bookingService;
             _documentService = documentService;
         }
 
-        public IActionResult Index(Guid flightId, Guid? returnFlightId)
+        public async Task<IActionResult> Index(Guid flightId, Guid? returnFlightId)
         {
+            var flightResponse = await _flightService.GetFlightById(flightId);
+
             var viewModel = new Models.Payment.PaymentViewModel()
             {
+                Flight = flightResponse.Data.FirstOrDefault(),
                 FlightId = flightId
             };
 
             if (returnFlightId != null)
             {
+                var returnFlightResponse = await _flightService.GetFlightById(returnFlightId.Value);
+                viewModel.ReturnFlight = returnFlightResponse.Data.FirstOrDefault();
                 viewModel.ReturnFlightId = returnFlightId;
             }
 

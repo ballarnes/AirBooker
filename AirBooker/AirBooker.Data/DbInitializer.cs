@@ -174,6 +174,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[0],
                     ArrivalAirportId = airports.ToList()[4].Id,
                     ArrivalAirport = airports.ToList()[4],
+                    TicketPrice = (decimal)new Random().Next(5000, 20000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -197,6 +198,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[4],
                     ArrivalAirportId = airports.ToList()[0].Id,
                     ArrivalAirport = airports.ToList()[0],
+                    TicketPrice = (decimal)new Random().Next(5000, 20000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -220,6 +222,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[4],
                     ArrivalAirportId = airports.ToList()[2].Id,
                     ArrivalAirport = airports.ToList()[2],
+                    TicketPrice = (decimal)new Random().Next(1000, 5000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -243,6 +246,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[2],
                     ArrivalAirportId = airports.ToList()[4].Id,
                     ArrivalAirport = airports.ToList()[4],
+                    TicketPrice = (decimal)new Random().Next(1000, 5000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -266,6 +270,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[3],
                     ArrivalAirportId = airports.ToList()[2].Id,
                     ArrivalAirport = airports.ToList()[2],
+                    TicketPrice = (decimal)new Random().Next(1000, 5000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -289,6 +294,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[2],
                     ArrivalAirportId = airports.ToList()[3].Id,
                     ArrivalAirport = airports.ToList()[3],
+                    TicketPrice = (decimal)new Random().Next(1000, 5000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -312,6 +318,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[3],
                     ArrivalAirportId = airports.ToList()[1].Id,
                     ArrivalAirport = airports.ToList()[1],
+                    TicketPrice = (decimal)new Random().Next(5000, 20000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -335,6 +342,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[1],
                     ArrivalAirportId = airports.ToList()[3].Id,
                     ArrivalAirport = airports.ToList()[3],
+                    TicketPrice = (decimal)new Random().Next(5000, 20000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -358,6 +366,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[3],
                     ArrivalAirportId = airports.ToList()[4].Id,
                     ArrivalAirport = airports.ToList()[4],
+                    TicketPrice = (decimal)new Random().Next(30000, 60000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -381,6 +390,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[4],
                     ArrivalAirportId = airports.ToList()[3].Id,
                     ArrivalAirport = airports.ToList()[3],
+                    TicketPrice = (decimal)new Random().Next(30000, 60000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -404,6 +414,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[0],
                     ArrivalAirportId = airports.ToList()[4].Id,
                     ArrivalAirport = airports.ToList()[4],
+                    TicketPrice = (decimal)new Random().Next(50000, 120000) / 100,
                 };
 
                 flights.Add(newFlight);
@@ -427,6 +438,7 @@ namespace AirBooker.Data
                     DepartureAirport = airports.ToList()[4],
                     ArrivalAirportId = airports.ToList()[0].Id,
                     ArrivalAirport = airports.ToList()[0],
+                    TicketPrice = (decimal)new Random().Next(50000, 120000) / 100,
                 };
 
                 flights.Add(newFlight);

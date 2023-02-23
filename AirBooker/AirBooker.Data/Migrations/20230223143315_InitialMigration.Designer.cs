@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirBooker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230221162133_InitialMigration")]
+    [Migration("20230223143315_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,6 +162,9 @@ namespace AirBooker.Data.Migrations
 
                     b.Property<int>("FreeSeatsCount")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("TicketPrice")
+                        .HasColumnType("smallmoney");
 
                     b.Property<TimeSpan>("TravelTime")
                         .HasColumnType("time");
