@@ -80,7 +80,7 @@
                                     <li class="list-group-item">
                                         <div class="input-group">
                                             <span class="input-group-text">Departure date:</span>
-                                            <input id="returnFlightDatepicker" type="text" asp-for="@Model.SelectedReturnFlightDate" class="form-control" placeholder="Select departure date" value="@Model.Flight.DepartureDateTime.ToShortDateString()" />
+                                            <input id="returnFlightDatepicker" type="text" asp-for="@Model.SelectedReturnFlightDate" class="form-control" placeholder="Select departure date" value="@Model.ReturnFlight.DepartureDateTime.ToShortDateString()" />
                                         </div>
                                     </li>
                                     <li class="list-group-item">
@@ -133,7 +133,15 @@
 
 @section Scripts
 {
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
+        Date.prototype.addDays = function (days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+
         $(function () {
             var jsonFlightDates = '@(Json.Serialize(Model.AvailableFlightDates.Select(x => x.ToString("d-M-yyyy"))))';
             var availableFlightDates = JSON.parse(jsonFlightDates);
@@ -143,7 +151,6 @@
                     dateFormat: 'dd/mm/yy',
                     minDate: new Date(@DateTime.Now.Year, @DateTime.Now.Month - 1, @DateTime.Now.Day),
                     onSelect: function () {
-                        $("#returnFlightDatepicker").datepicker('option', 'minDate', this.value);
                         setReturnFlightDate();
                     },
                     beforeShowDay: checkAvailableFlightDates
@@ -160,7 +167,8 @@
             }
 
             function setReturnFlightDate() {
-                const flightDate = new Date($("#flightDatepicker").datepicker("getDate"));
+                const flightDate = new Date($("#flightDatepicker").datepicker("getDate")).addDays(1);
+                $("#returnFlightDatepicker").datepicker('option', 'minDate', flightDate);
                 $("#returnFlightDatepicker").datepicker(
                     {
                         dateFormat: 'dd/mm/yy',
@@ -181,7 +189,7 @@
                 $("#returnFlightDatepicker").datepicker(
                     {
                         dateFormat: 'dd/mm/yy',
-                        minDate: new Date(@Model.Flight.DepartureDateTime.Year, @Model.Flight.DepartureDateTime.Month - 1, @Model.Flight.DepartureDateTime.Day),
+                        minDate: new Date(@Model.ReturnFlight.DepartureDateTime.Year, @Model.ReturnFlight.DepartureDateTime.Month - 1, @Model.ReturnFlight.DepartureDateTime.Day),
                         beforeShowDay: checkAvailableReturnFlightDates
                     });
             });
