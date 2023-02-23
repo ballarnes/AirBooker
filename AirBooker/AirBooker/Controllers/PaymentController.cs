@@ -9,7 +9,7 @@ namespace AirBooker.Web.Controllers
         private readonly IBookingService _bookingService;
         private readonly IDocumentService _documentService;
 
-        public const string ReceiptMarkup = "<h1 style=\"text-align:center\">Receipt for <strong>{0}</strong></h1>\r\n\r\n<hr />\r\n<table class=\"table\" style=\"width:1200.6px\">\r\n\t<thead>\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\" style=\"text-align:left; width:50%\">Booking №: {1}</th>\r\n\t\t\t<th scope=\"col\" style=\"text-align:right; width:50%\">Date: {2}</th>\r\n\t\t</tr>\r\n\t</thead>\r\n</table>\r\n\r\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\">\r\n\t<caption>\r\n\t<p>&nbsp;</p>\r\n\r\n\t<p><strong>Your data:</strong></p>\r\n\t</caption>\r\n\t<thead>\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">Username: {0}</th>\r\n\t\t</tr>\r\n\t</thead>\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td style=\"text-align:center\">Email: {0}</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\">\r\n\t<caption>\r\n\t<p>&nbsp;</p>\r\n\r\n\t<p><strong>Ticket Info:</strong></p>\r\n\t</caption>\r\n\t<thead>\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">Airline: {4}</th>\r\n\t\t</tr>\r\n\t</thead>\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td style=\"text-align:center\">Flight №: {5}</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"text-align:center\">Departure: {6}</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"text-align:center\">Arrival: {7}</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<hr />\r\n<p style=\"text-align:center\">AirBooker - 2023</p>\r\n";
+        public const string ReceiptMarkup = "<h1 style=\"text-align:center\">Receipt for <strong>{0}</strong></h1>\r\n\r\n<hr />\r\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"margin-top:30px; width:100%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td style=\"width:50%\">Booking №: <strong>{1}</strong></td>\r\n\t\t\t<td style=\"text-align:right; width:50%\">Date: <strong>{2}</strong></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<h3 style=\"text-align:center\">Your info:</h3>\r\n\r\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"margin-top:30px; width:100%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td style=\"width:50%\">Username: <strong>{0}</strong></td>\r\n\t\t\t<td style=\"text-align:right; width:50%\">Email: <strong>{3}</strong></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3 style=\"text-align:center\">Ticket info:</h3>\r\n\r\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"margin-bottom:30px; width:100%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td style=\"width:50%\">Airline: <strong>{4}</strong></td>\r\n\t\t\t<td style=\"text-align:right; width:50%\">Flight №: <strong>{5}</strong></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"width:50%\">Departure: <strong>{6}</strong></td>\r\n\t\t\t<td style=\"text-align:right; width:50%\">Arrival: <strong>{7}</strong></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"width:50%\">Departure airport: <strong>{8}</strong></td>\r\n\t\t\t<td style=\"text-align:right; width:50%\">Arrival airport: <strong>{9}</strong></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<hr />\r\n<p>&nbsp;</p>\r\n\r\n<h3 style=\"text-align:center\">AirBooker - 2023</h3>\r\n";
 
         public PaymentController(
             ILogger<PaymentController> logger,
@@ -61,15 +61,17 @@ namespace AirBooker.Web.Controllers
             var flightBookingResponse = await _bookingService.GetBookingById(flightBookingId);
             var flightBooking = flightBookingResponse.Data.FirstOrDefault();
 
-            var pageHTML = string.Format(ReceiptMarkup, 
-                flightBooking.User.UserName, 
-                flightBookingId, 
-                flightBooking.BookingDateTime, 
-                flightBooking.User.Email, 
+            var pageHTML = string.Format(ReceiptMarkup,
+                flightBooking.User.UserName,
+                flightBookingId,
+                flightBooking.BookingDateTime,
+                flightBooking.User.Email,
                 flightBooking.Flight.Airline.Name,
                 flightBooking.Flight.FlightNumber,
                 flightBooking.Flight.DepartureDateTime,
-                flightBooking.Flight.ArrivalDateTime);
+                flightBooking.Flight.ArrivalDateTime,
+                flightBooking.Flight.DepartureAirport.Name,
+                flightBooking.Flight.ArrivalAirport.Name);
 
             using (MemoryStream stream = new MemoryStream())
             {
