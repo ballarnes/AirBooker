@@ -9,7 +9,7 @@
             asp-route-pageNumber="@(Model.ActualPage - 1)"
             asp-route-selectedAirportId="@(Model.SelectedAirportId)"
             class="page-link">
-            Previous
+            @Localizer["Previous"]
         </a>
     </li>
     @for (var i = 1; i <= Model.TotalPages; i++)
@@ -31,41 +31,8 @@
             asp-route-pageNumber="@(Model.ActualPage + 1)"
             asp-route-selectedAirportId="@(Model.SelectedAirportId)"
             class="page-link">
-            Next
+            @Localizer["Next"]
         </a>
     </li>
   </ul>
 </nav>
-
-@*<div class="esh-pager">
-    <div class="container">
-        <article class="esh-pager-wrapper row">
-            <nav>
-                <a class="esh-pager-item esh-pager-item--navigable @Model.Previous"
-                    id="Previous"                    
-                    asp-controller="Catalog"
-                    asp-action="Index"
-                    asp-route-page="@(Model.ActualPage -1)"
-                    asp-route-itemsPage="@(Model.ItemsPerPage)"
-                    aria-label="Previous">
-                    Previous
-                </a>
-
-                <span class="esh-pager-item">
-                    Showing @Model.ItemsPerPage of @Model.TotalItems products - Page @(Model.ActualPage + 1) - @Model.TotalPages
-                </span>
-
-                <a class="esh-pager-item esh-pager-item--navigable @Model.Next"
-                    id="Next"                    
-                    asp-controller="Catalog"
-                    asp-action="Index"
-                    asp-route-page="@(Model.ActualPage + 1)"
-                    asp-route-itemsPage="@(Model.ItemsPerPage)"
-                    aria-label="Next">
-                    Next
-                </a>
-            </nav>
-        </article>
-    </div>
-</div>
-*@

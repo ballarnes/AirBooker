@@ -5,67 +5,67 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Destination:</span>
+                <span class="input-group-text">@Localizer["Destination"]:</span>
                 <input type="text" class="form-control" value="@Model.ArrivalAirport.Place" disabled readonly>
             </div>
         </li>
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Flight №:</span>
+                <span class="input-group-text">@Localizer["Flight"] №:</span>
                 <input type="text" class="form-control" value="@Model.FlightNumber" disabled readonly>
             </div>
         </li>
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Departure:</span>
+                <span class="input-group-text">@Localizer["Departure"]:</span>
                 <input type="text" class="form-control" value="@Model.DepartureAirport.Name" disabled readonly>
             </div>
         </li>
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Arrival:</span>
+                <span class="input-group-text">@Localizer["Arrival"]:</span>
                 <input type="text" class="form-control" value="@Model.ArrivalAirport.Name" disabled readonly>
             </div>
         </li>
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Airline:</span>
+                <span class="input-group-text">@Localizer["Airline"]:</span>
                 <input type="text" class="form-control" value="@Model.Airline.Name" disabled readonly>
             </div>
         </li>
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Departure date:</span>
+                <span class="input-group-text">@Localizer["DepartureDate"]:</span>
                 <input type="text" class="form-control" value="@Model.DepartureDateTime.ToShortDateString()" disabled readonly />
             </div>
         </li>
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Departure time:</span>
+                <span class="input-group-text">@Localizer["DepartureTime"]:</span>
                 <input type="text" class="form-control" value="@Model.DepartureDateTime.ToShortTimeString()" disabled readonly />
             </div>
         </li>
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Arrival date:</span>
+                <span class="input-group-text">@Localizer["ArrivalDate"]:</span>
                 <input type="text" class="form-control" value="@Model.ArrivalDateTime.ToShortDateString()" disabled readonly />
             </div>
         </li>
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Arrival time:</span>
+                <span class="input-group-text">@Localizer["ArrivalTime"]:</span>
                 <input type="text" class="form-control" value="@Model.ArrivalDateTime.ToShortTimeString()" disabled readonly />
             </div>
         </li>
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Travel time:</span>
+                <span class="input-group-text">@Localizer["TravelTime"]:</span>
                 <input type="text" class="form-control" value="@Model.TravelTime.ToString("hh':'mm")" disabled readonly />
             </div>
         </li>
         <li class="list-group-item">
             <div class="input-group">
-                <span class="input-group-text">Price:</span>
+                <span class="input-group-text">@Localizer["Price"]:</span>
                 <input type="text" class="form-control" value="@Model.TicketPrice.ToString("C2", new CultureInfo("en-US"))" disabled readonly>
             </div>
         </li>

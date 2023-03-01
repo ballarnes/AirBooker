@@ -46,6 +46,14 @@ footer {
     50% { border-color: #D8131B }
 }
 
+.flight-card-overlay {
+    position: absolute;
+    display: flex;
+    width: inherit;
+    justify-content: center;
+    color: white;
+}
+
 .flight-card-img {
     object-fit: cover;
     object-position: left;

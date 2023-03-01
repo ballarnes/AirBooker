@@ -1,4 +1,5 @@
 ﻿using AirBooker.Domain.Models.Dtos;
+using System.ComponentModel.DataAnnotations;
 
 namespace AirBooker.Web.Models.Flight
 {

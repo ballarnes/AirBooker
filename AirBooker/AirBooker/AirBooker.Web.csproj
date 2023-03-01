@@ -15,6 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="Resources\Views\Home\_PaginationPartial.en-US.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\Views\Home\_PaginationPartial.en-US.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.11" />
@@ -30,6 +38,10 @@
     <ProjectReference Include="..\AirBooker.Data\AirBooker.Data.csproj" />
     <ProjectReference Include="..\AirBooker.Domain\AirBooker.Domain.csproj" />
     <ProjectReference Include="..\AirBooker.Infrastructure\AirBooker.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Controllers\Payment\" />
   </ItemGroup>
 
 </Project>

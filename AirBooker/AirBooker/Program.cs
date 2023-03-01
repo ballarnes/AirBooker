@@ -8,7 +8,11 @@ using AirBooker.Domain.Services.Contracts;
 using AirBooker.Infrastructure.Contracts.Services;
 using AirBooker.Infrastructure.Services;
 using AirBooker.Web;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using PdfSharp.Charting;
+using System.Globalization;
 
 namespace AirBooker
 {
@@ -47,10 +51,23 @@ namespace AirBooker
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
 				.AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddControllersWithViews();
 
-			builder.Services.AddControllersWithViews();
+            builder.Services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
 
-			var app = builder.Build();
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.SetDefaultCulture("en-US");
+                options.AddSupportedUICultures("en-US", "uk-UA");
+                options.FallBackToParentUICultures = true;
+                options.RequestCultureProviders.Clear();
+            });
+
+            builder.Services.AddControllersWithViews()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
+            var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
@@ -72,7 +89,22 @@ namespace AirBooker
 			app.UseAuthentication();
 			app.UseAuthorization();
 
-			app.MapControllerRoute(
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("uk-UA"),
+                },
+                SupportedUICultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("uk-UA"),
+                }
+            });
+
+            app.MapControllerRoute(
 				name: "default",
 				pattern: "{controller=Home}/{action=Index}/{id?}");
 			app.MapRazorPages();

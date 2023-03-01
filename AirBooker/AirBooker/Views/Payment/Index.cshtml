@@ -14,7 +14,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="input-group">
-                        <span class="input-group-text">Ticket (№ @Model.Flight.FlightNumber):</span>
+                        <span class="input-group-text">@Localizer["Ticket"] (№ @Model.Flight.FlightNumber):</span>
                         <input type="text" class="form-control" value="@Model.Flight.TicketPrice.ToString("C2", new CultureInfo("en-US"))" disabled readonly>
                     </div>
                 </li>
@@ -22,14 +22,14 @@
                 {
                     <li class="list-group-item">
                         <div class="input-group">
-                            <span class="input-group-text">Return ticket (№ @Model.ReturnFlight.FlightNumber):</span>
+                            <span class="input-group-text">@Localizer["ReturnTicket"] (№ @Model.ReturnFlight.FlightNumber):</span>
                             <input type="text" class="form-control" value="@Model.ReturnFlight.TicketPrice.ToString("C2", new CultureInfo("en-US"))" disabled readonly>
                         </div>
                     </li>
                 }
                 <li class="list-group-item">
                     <div class="input-group">
-                        <span class="input-group-text">Sum:</span>
+                        <span class="input-group-text">@Localizer["Sum"]:</span>
                         <input type="text" class="form-control fw-bold" value="@((Model.Flight.TicketPrice + (Model.ReturnFlight != null ? Model.ReturnFlight.TicketPrice : 0)).ToString("C2", new CultureInfo("en-US")))" disabled readonly>
                     </div>
                 </li>
@@ -169,7 +169,7 @@
             </div>
             <div class="mt-3">
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-outline-success w-25">Pay</button>
+                    <button type="submit" class="btn btn-outline-success w-25">@Localizer["Pay"]</button>
                 </div>
             </div>
         </form>

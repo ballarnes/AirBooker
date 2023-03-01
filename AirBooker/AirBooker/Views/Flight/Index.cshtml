@@ -22,25 +22,25 @@
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
                                         <div class="input-group">
-                                            <span class="input-group-text">Departure:</span>
+                                            <span class="input-group-text">@Localizer["Departure"]:</span>
                                             <input type="text" class="form-control" value="@Model.Flight.DepartureAirport.Name" disabled readonly>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-group">
-                                            <span class="input-group-text">Arrival:</span>
+                                            <span class="input-group-text">@Localizer["Arrival"]:</span>
                                             <input type="text" class="form-control" value="@Model.Flight.ArrivalAirport.Name" disabled readonly>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-group">
-                                            <span class="input-group-text">Departure date:</span>
+                                            <span class="input-group-text">@Localizer["DepartureDate"]:</span>
                                             <input id="flightDatepicker" type="text" asp-for="@Model.SelectedFlightDate" class="form-control" placeholder="Select departure date" value="@Model.Flight.DepartureDateTime.ToShortDateString()" />
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-group">
-                                            <span class="input-group-text">Departure time:</span>
+                                            <span class="input-group-text">@Localizer["DepartureTime"]:</span>
                                             <input type="text" class="form-control" value="@Model.Flight.DepartureDateTime.ToShortTimeString()" disabled readonly />
                                         </div>
                                     </li>
@@ -67,25 +67,25 @@
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
                                         <div class="input-group">
-                                            <span class="input-group-text">Departure:</span>
+                                            <span class="input-group-text">@Localizer["Departure"]:</span>
                                             <input type="text" class="form-control" value="@Model.ReturnFlight.DepartureAirport.Name" disabled readonly>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-group">
-                                            <span class="input-group-text">Arrival:</span>
+                                            <span class="input-group-text">@Localizer["Arrival"]:</span>
                                             <input type="text" class="form-control" value="@Model.ReturnFlight.ArrivalAirport.Name" disabled readonly>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-group">
-                                            <span class="input-group-text">Departure date:</span>
-                                            <input id="returnFlightDatepicker" type="text" asp-for="@Model.SelectedReturnFlightDate" class="form-control" placeholder="Select departure date" value="@Model.ReturnFlight.DepartureDateTime.ToShortDateString()" />
+                                            <span class="input-group-text">@Localizer["DepartureDate"]:</span>
+                                            <input id="returnFlightDatepicker" type="text" asp-for="@Model.SelectedReturnFlightDate" class="form-control" placeholder="@Localizer["SelectDepartureDate"]" value="@Model.ReturnFlight.DepartureDateTime.ToShortDateString()" />
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-group">
-                                            <span class="input-group-text">Departure time:</span>
+                                            <span class="input-group-text">@Localizer["DepartureTime"]:</span>
                                             <input type="text" class="form-control" value="@Model.ReturnFlight.DepartureDateTime.ToShortTimeString()" disabled readonly />
                                         </div>
                                     </li>
@@ -101,7 +101,7 @@
                     <a asp-controller="Flight" asp-action="Index" asp-route-withReturnFlight="true">
                         <div class="btn btn-outline-secondary btn-lg mt-2">
                             <i class="bi bi-plus-square"></i>
-                            Want to add a return ticket?
+                            @Localizer["ReturnTicketButton"]
                         </div>
                     </a>
                 </div>
@@ -113,7 +113,7 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-outline-success w-25">Book</button>
+                <button type="submit" class="btn btn-outline-success w-25">@Localizer["Book"]</button>
             </div>
         }
         else
@@ -123,8 +123,8 @@
                     class="btn btn-outline-secondary w-25"
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
-                    title="You must be logged in to book a flight.">
-                    Login
+                    title="@Localizer["LoginButtonTooltip"]">
+                    @Localizer["Login"]
                 </button>
             </a>
         }
@@ -148,7 +148,7 @@
 
             $("#flightDatepicker").datepicker(
                 {
-                    dateFormat: 'dd/mm/yy',
+                    dateFormat: '@AirBooker.Web.Utils.JQueryUIDatePickerHelper.ConvertDateFormat()',
                     minDate: new Date(@DateTime.Now.Year, @DateTime.Now.Month - 1, @DateTime.Now.Day),
                     onSelect: function () {
                         setReturnFlightDate();
@@ -171,7 +171,7 @@
                 $("#returnFlightDatepicker").datepicker('option', 'minDate', flightDate);
                 $("#returnFlightDatepicker").datepicker(
                     {
-                        dateFormat: 'dd/mm/yy',
+                        dateFormat: '@AirBooker.Web.Utils.JQueryUIDatePickerHelper.ConvertDateFormat()',
                         minDate: flightDate,
                     }
                 );
@@ -188,7 +188,7 @@
             $(function () {
                 $("#returnFlightDatepicker").datepicker(
                     {
-                        dateFormat: 'dd/mm/yy',
+                        dateFormat: '@AirBooker.Web.Utils.JQueryUIDatePickerHelper.ConvertDateFormat()',
                         minDate: new Date(@Model.ReturnFlight.DepartureDateTime.Year, @Model.ReturnFlight.DepartureDateTime.Month - 1, @Model.ReturnFlight.DepartureDateTime.Day),
                         beforeShowDay: checkAvailableReturnFlightDates
                     });

@@ -1,7 +1,7 @@
 ﻿@model AirBooker.Web.Models.Payment.PaymentResultViewModel
 
 @{
-    ViewData["Title"] = "Result";
+    ViewData["Title"] = @Localizer["ResultPageTitle"];
 }
 
 <div class="text-center justify-content-center">
@@ -10,17 +10,17 @@
     @if (Model.OperationSuccess)
     {
         <i class="bi bi-check2-circle" style="font-size: 250px; color: green;"></i>
-        <div><h1 class="display-6">Thank you for your booking. Have a good flight!</h1></div>
+        <div><h1 class="display-6">@Localizer["ThankYouMessage"]</h1></div>
         <div class="justify-content-center d-flex">
             <div class="row">
                 <div class="col">
                     <a asp-controller="Payment" asp-action="GetReceipt" target="_blank" asp-route-flightBookingId="@Model.FlightBookingId" asp-route-returnFlightBookingId="@Model.ReturnFlightBookingId">
-                        <input type="button" class="btn btn-outline-success" value="Download receipt" />
+                        <input type="button" class="btn btn-outline-success" value="@Localizer["Receipt"]" />
                     </a>
                 </div>
                 <div class="col">
                     <a asp-controller="Home" asp-action="Index">
-                        <input type="button" class="btn btn-outline-secondary" value="To Home page" />
+                        <input type="button" class="btn btn-outline-secondary" value="@Localizer["ToHomeButton"]" />
                     </a>
                 </div>
             </div>
@@ -28,7 +28,7 @@
     }
     else
     {
-        <h3 style="color: red;">Sorry</h3>
-        <p style="color: red;">There was an error while processing your booking.</p>
+        <h3 style="color: red;">@Localizer["Sorry"]</h3>
+        <p style="color: red;">@Localizer["RequestError"]</p>
     }
 </div>

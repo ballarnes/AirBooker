@@ -24,10 +24,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -43,7 +43,14 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - AirBooker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row mt-2">
+                <div class="col">
+                    &copy; 2023 - AirBooker - <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
+                </div>
+                <div class="col justify-content-end d-flex">
+                    <partial name="_SelectLanguagePartial" />
+                </div>
+            </div>
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
