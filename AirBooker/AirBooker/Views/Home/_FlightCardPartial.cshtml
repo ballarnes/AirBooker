@@ -1,0 +1,34 @@
+﻿@model FlightDto
+
+<div class="card flight-card mb-3" style="max-width: 450px;">
+    <input type="hidden" asp-for="@Model.Id" name="id" />
+    <div class="row g-0 flight-cards-row">
+        <div class="col-md-4">
+            <div class="flight-card-overlay text-break text-center">
+                <h1>@Localizer["Today"]</h1>
+            </div>
+            <img src="@Model.ArrivalAirport.CityPhotoUrl" class="img-fluid flight-card-img rounded-start" alt="city photo url">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.ArrivalAirport.Place</h5>
+                <p class="card-text">@Localizer["Departure"]: @Model.DepartureAirport.Name</p>
+                <p class="card-text">@Localizer["Arrival"]: @Model.ArrivalAirport.Name</p>
+                @if (Model.FreeSeatsCount > 0)
+                {
+                    <p class="card-text"><small class="text-muted free-seats">@Localizer["FreeSeats"]</small></p>
+                }
+                else
+                {
+                    <p class="card-text"><small class="text-muted no-free-seats">@Localizer["NoFreeSeats"]</small></p>
+                }
+                <a asp-controller="Flight" asp-action="Index" asp-route-id="@Model.Id">
+                    <input type="button" class="btn btn-success" value="@Localizer["BookHere"]" />
+                </a>
+                <a asp-controller="Airline" asp-action="Index" asp-route-id="@Model.AirlineId">
+                    <img src="@Model.Airline.LogoUrl" class="img-circle-sm card-round-img" alt="logo url" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

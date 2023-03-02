@@ -1,0 +1,38 @@
+﻿@model AirBooker.Web.Models.Pagination.PaginationInfo
+
+<nav>
+  <ul class="pagination justify-content-center mt-5">
+    <li class="page-item @(Model.ActualPage == 0 ? "disabled" : "")">
+        <a 
+            asp-controller="Home" 
+            asp-action="Index"
+            asp-route-pageNumber="@(Model.ActualPage - 1)"
+            asp-route-selectedAirportId="@(Model.SelectedAirportId)"
+            class="page-link">
+            @Localizer["Previous"]
+        </a>
+    </li>
+    @for (var i = 1; i <= Model.TotalPages; i++)
+    {
+        <li class="page-item @(Model.ActualPage == i - 1 ? "active" : "")">
+            <a 
+                class="page-link"
+                asp-controller="Home"
+                asp-action="Index"
+                asp-route-pageNumber="@(i - 1)"
+                asp-route-selectedAirportId="@(Model.SelectedAirportId)">
+                @i
+            </a>
+        </li>
+    }
+    <li class="page-item @(Model.ActualPage == Model.TotalPages - 1 ? "disabled" : "")">
+        <a asp-controller="Home"
+            asp-action="Index"
+            asp-route-pageNumber="@(Model.ActualPage + 1)"
+            asp-route-selectedAirportId="@(Model.SelectedAirportId)"
+            class="page-link">
+            @Localizer["Next"]
+        </a>
+    </li>
+  </ul>
+</nav>

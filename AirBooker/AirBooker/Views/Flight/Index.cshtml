@@ -1,0 +1,207 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> SignInManager
+@model AirBooker.Web.Models.Flight.IndexViewModel
+
+@{
+    ViewData["Title"] = Model.Flight.ArrivalAirport.Name;
+}
+
+<form asp-controller="Flight" asp-action="Overview" method="post">
+    <input type="hidden" asp-for="@Model.FlightNumber" />
+    <div class="row">
+        <div class="col">
+            <div class="card" style="height: 100%;">
+                <div class="row g-0" style="height: inherit;">
+                    <div class="col-md-4">
+                        <img src="@Model.Flight.ArrivalAirport.CityPhotoUrl" class="img-fluid flight-card-img h-750px rounded-start" alt="city photo url">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title display-5 mb-5 text-center">@Model.Flight.ArrivalAirport.Place</h5>
+                            <div class="card">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="input-group">
+                                            <span class="input-group-text">@Localizer["Departure"]:</span>
+                                            <input type="text" class="form-control" value="@Model.Flight.DepartureAirport.Name" disabled readonly>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="input-group">
+                                            <span class="input-group-text">@Localizer["Arrival"]:</span>
+                                            <input type="text" class="form-control" value="@Model.Flight.ArrivalAirport.Name" disabled readonly>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="input-group">
+                                            <span class="input-group-text">@Localizer["DepartureDate"]:</span>
+                                            <input id="flightDatepicker" type="text" asp-for="@Model.SelectedFlightDate" class="form-control" placeholder="Select departure date" value="@Model.Flight.DepartureDateTime.ToShortDateString()" />
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="input-group">
+                                            <span class="input-group-text">@Localizer["DepartureTime"]:</span>
+                                            <input type="text" class="form-control" value="@Model.Flight.DepartureDateTime.ToShortTimeString()" disabled readonly />
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card justify-content-center" style="height: 100%;">
+            @if (Model.WithReturnFlight && Model.ReturnFlight != null)
+            {
+                <input type="hidden" asp-for="@Model.ReturnFlightNumber" />
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="@Model.ReturnFlight.ArrivalAirport.CityPhotoUrl" class="img-fluid flight-card-img h-750px rounded-start" alt="city photo url">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title display-5 mb-5 text-center">@Model.ReturnFlight.ArrivalAirport.Place</h5>
+                            <div class="card">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="input-group">
+                                            <span class="input-group-text">@Localizer["Departure"]:</span>
+                                            <input type="text" class="form-control" value="@Model.ReturnFlight.DepartureAirport.Name" disabled readonly>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="input-group">
+                                            <span class="input-group-text">@Localizer["Arrival"]:</span>
+                                            <input type="text" class="form-control" value="@Model.ReturnFlight.ArrivalAirport.Name" disabled readonly>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="input-group">
+                                            <span class="input-group-text">@Localizer["DepartureDate"]:</span>
+                                            <input id="returnFlightDatepicker" type="text" asp-for="@Model.SelectedReturnFlightDate" class="form-control" placeholder="@Localizer["SelectDepartureDate"]" value="@Model.ReturnFlight.DepartureDateTime.ToShortDateString()" />
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="input-group">
+                                            <span class="input-group-text">@Localizer["DepartureTime"]:</span>
+                                            <input type="text" class="form-control" value="@Model.ReturnFlight.DepartureDateTime.ToShortTimeString()" disabled readonly />
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="d-flex justify-content-center">
+                    <a asp-controller="Flight" asp-action="Index" asp-route-withReturnFlight="true">
+                        <div class="btn btn-outline-secondary btn-lg mt-2">
+                            <i class="bi bi-plus-square"></i>
+                            @Localizer["ReturnTicketButton"]
+                        </div>
+                    </a>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+    <div class="mt-3">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-outline-success w-25">@Localizer["Book"]</button>
+            </div>
+        }
+        else
+        {
+            <a class="nav-link text-dark d-flex justify-content-center" asp-area="Identity" asp-page="/Account/Login">
+                <button type="button"
+                    class="btn btn-outline-secondary w-25"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="@Localizer["LoginButtonTooltip"]">
+                    @Localizer["Login"]
+                </button>
+            </a>
+        }
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        Date.prototype.addDays = function (days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+
+        $(function () {
+            var jsonFlightDates = '@(Json.Serialize(Model.AvailableFlightDates.Select(x => x.ToString("d-M-yyyy"))))';
+            var availableFlightDates = JSON.parse(jsonFlightDates);
+
+            $("#flightDatepicker").datepicker(
+                {
+                    dateFormat: '@AirBooker.Web.Utils.JQueryUIDatePickerHelper.ConvertDateFormat()',
+                    minDate: new Date(@DateTime.Now.Year, @DateTime.Now.Month - 1, @DateTime.Now.Day),
+                    onSelect: function () {
+                        setReturnFlightDate();
+                    },
+                    beforeShowDay: checkAvailableFlightDates
+                }
+            );
+
+            function checkAvailableFlightDates(date) {
+                let day = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+                if ($.inArray(day, availableFlightDates) != -1) {
+                    return [true, "", "available"];
+                } else {
+                    return [false, "", "unavailable"];
+                }
+            }
+
+            function setReturnFlightDate() {
+                const flightDate = new Date($("#flightDatepicker").datepicker("getDate")).addDays(1);
+                $("#returnFlightDatepicker").datepicker('option', 'minDate', flightDate);
+                $("#returnFlightDatepicker").datepicker(
+                    {
+                        dateFormat: '@AirBooker.Web.Utils.JQueryUIDatePickerHelper.ConvertDateFormat()',
+                        minDate: flightDate,
+                    }
+                );
+                $("#returnFlightDatepicker").datepicker('setDate', flightDate);
+            }
+        });
+    </script>
+    @if (Model.WithReturnFlight)
+    {
+        <script>
+            var jsonReturnFlightDates = '@(Json.Serialize(Model.AvailableReturnFlightDates.Select(x => x.ToString("d-M-yyyy"))))';
+            var availableReturnFlightDates = JSON.parse(jsonReturnFlightDates);
+
+            $(function () {
+                $("#returnFlightDatepicker").datepicker(
+                    {
+                        dateFormat: '@AirBooker.Web.Utils.JQueryUIDatePickerHelper.ConvertDateFormat()',
+                        minDate: new Date(@Model.ReturnFlight.DepartureDateTime.Year, @Model.ReturnFlight.DepartureDateTime.Month - 1, @Model.ReturnFlight.DepartureDateTime.Day),
+                        beforeShowDay: checkAvailableReturnFlightDates
+                    });
+            });
+
+            function checkAvailableReturnFlightDates(date) {
+                let day = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+                if ($.inArray(day, availableReturnFlightDates) != -1) {
+                    return [true, "", "available"];
+                } else {
+                    return [false, "", "unavailable"];
+                }
+            }
+        </script>
+    }
+}

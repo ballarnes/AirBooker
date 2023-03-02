@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-AirBooker-317a734a-dad6-4d6e-9114-36712e543fe7</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\images\airports\**" />
+    <Content Remove="wwwroot\images\airports\**" />
+    <EmbeddedResource Remove="wwwroot\images\airports\**" />
+    <None Remove="wwwroot\images\airports\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\Views\Home\_PaginationPartial.en-US.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\Views\Home\_PaginationPartial.en-US.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AirBooker.Data\AirBooker.Data.csproj" />
+    <ProjectReference Include="..\AirBooker.Domain\AirBooker.Domain.csproj" />
+    <ProjectReference Include="..\AirBooker.Infrastructure\AirBooker.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Controllers\Payment\" />
+  </ItemGroup>
+
+</Project>
